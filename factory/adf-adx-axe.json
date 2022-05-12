@@ -1,0 +1,9 @@
+{
+	"name": "adf-adx-axe",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "174b0049-0c2e-4a7d-ad7d-c77985ff8787",
+		"tenantId": "aa9394f7-1d3c-444e-81ec-0018bce4cc25"
+	}
+}
