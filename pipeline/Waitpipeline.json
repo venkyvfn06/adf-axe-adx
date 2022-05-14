@@ -25,9 +25,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
@@ -41,6 +47,7 @@
 						}
 					},
 					"enableStaging": true,
+					"parallelCopies": 1,
 					"validateDataConsistency": false,
 					"translator": {
 						"type": "TabularTranslator",
@@ -53,7 +60,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SqlAzureSqlTable",
+						"referenceName": "InputBlobdataset",
 						"type": "DatasetReference"
 					}
 				],
@@ -83,6 +90,25 @@
 					},
 					"fieldList": []
 				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": []
 			}
 		],
 		"annotations": []
